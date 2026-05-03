@@ -60,7 +60,7 @@ print(average_rooms)
 
 #Построим гистрограмму распределения цены за квадратный метр
 plt.figure(figsize=(10, 5))
-plt.hist(df['price_per_m2'], bins=30, edgecolor='black')
+plt.hist(df['price_per_m2'], bins=50, edgecolor='black')
 plt.title('Распределение цены за квадратный метр')
 plt.xlabel('Цена за м² (руб)')
 plt.ylabel('Колличество объявлений')
@@ -100,6 +100,9 @@ group_by_district_len = df.groupby('district')['price_per_m2'].mean()
 sorted_len = group_by_district_len.sort_values(ascending=False)
 print("\nТоп 5 самых дорогих районов")
 print(sorted_len.head(5))
+
+#Сохраним финальный датасет
+df.to_csv('../data/cian_final_cleaned.csv', index=False)
 
 #Построим столбчатую диаграмму средней цена по кол-ву комнат
 rooms_price = df.groupby('rooms_count')['price_per_m2'].mean()
